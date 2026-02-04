@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https:;">
+    <title>Pineapple Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="section-header" style="margin-bottom: 0; width: 100%;">
+            <h1>Admin Dashboard</h1>
+            <button id="logout-btn" data-action="logout" class="btn-red hidden">Logout</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Login Section -->
+        <div id="auth-section" class="admin-auth">
+            <h2>Admin Access</h2>
+            <input type="password" id="admin-key" placeholder="Enter Admin Secret"
+                style="width: 100%; padding: 10px; margin: 10px 0;">
+            <button data-action="login" class="btn-primary">Login</button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="hidden">
+            <div class="section-header">
+                <h2>Pending Games</h2>
+                <button data-action="refresh-pending" class="btn-blue">Refresh</button>
+            </div>
+            <div id="pending-list" class="pending-list">
+                <!-- Items injected here -->
+            </div>
+
+            <!-- Storage Management Section -->
+            <div id="storage-section" style="margin-top: 40px;">
+                <div class="section-header">
+                    <h2>📦 Storage Management</h2>
+                    <button data-action="refresh-storage" class="btn-blue">Refresh Storage</button>
+                </div>
+
+                <div class="storage-stats">
+                    <h3>Storage Overview</h3>
+                    <p>Total Files: <span id="total-files" style="font-weight: bold;">0</span></p>
+                    <p>Total Size: <span id="total-size" style="font-weight: bold;">0 MB</span></p>
+                </div>
+
+                <div id="storage-details">
+                    <h3>Games Using Storage:</h3>
+                    <div id="games-storage-list" class="pending-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Browser Modal -->
+        <div id="fileModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Files for: <span id="modal-game-id"></span></h2>
+                <div id="file-list" style="max-height: 400px; overflow-y: auto; margin: 20px 0;">
+                    <!-- Files will be listed here -->
+                </div>
+                <button data-action="close-modal" class="btn-red">Close</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

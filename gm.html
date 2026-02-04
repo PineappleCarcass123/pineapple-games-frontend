@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https:;">
+  <title>Play</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <a href="#" class="back">← Back</a>
+    <h1 id="game-title"></h1>
+    <p id="game-dev" class="muted"></p>
+  </header>
+
+  <main class="container center">
+    <iframe id="game-frame" class="game-frame"></iframe>
+
+    <div id="download-card" class="download-card hidden">
+      <div class="download-info">
+        <h2 id="dl-title">Download Game</h2>
+        <p id="dl-platform" class="platform-tags"></p>
+        <p id="dl-size" class="muted"></p>
+        <a id="dl-btn" href="#" class="btn-primary download-btn" target="_blank">Download Now</a>
+        <p class="muted small">Always scan downloaded files for viruses.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/gm.js"></script>
+</body>
+
+</html>
