@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https:;">
+    <title>Upload Game - PineappleGames</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="index.html" class="back">← Back to Games</a>
+        <h1>Upload Game</h1>
+        <p class="muted">Generate the JSON data for your game</p>
+    </header>
+
+    <main class="container">
+        <!-- Guide Section -->
+        <div class="upload-container" style="margin-bottom: 30px;">
+            <h2 class="guide-header">
+                Upload Guide
+            </h2>
+
+            <div style="text-align: left;">
+                <h3 style="color:var(--text); margin-bottom: 5px;">1. How it Works</h3>
+                <p style="margin-top: 0;">
+                    We are currently in <strong>Beta</strong>. To publish your game:
+                </p>
+                <ol style="padding-left: 20px; line-height: 1.6;">
+                    <li><strong>Fill form:</strong> Enter your game details below.</li>
+                    <li><strong>Submit:</strong> Click the "Submit Game" button.</li>
+                    <li><strong>Review:</strong> Our moderators will check your game. Once approved, it will appear on
+                        the homepage.</li>
+                </ol>
+
+                <h3 style="color:var(--text); margin-bottom: 5px; margin-top: 20px;">2. Allowed Content</h3>
+                <ul style="padding-left: 20px; line-height: 1.6;">
+                    <li><strong>Web (HTML5):</strong> Must be hosted (e.g., GitHub Pages, Itch.io) or a single file.
+                    </li>
+                    <li><strong>Downloads:</strong> .zip, .exe, .apk (provide direct links).</li>
+                    <li><strong>External:</strong> Steam store pages, Itch.io links, etc.</li>
+                </ul>
+
+                <h3 style="color:var(--text); margin-bottom: 5px; margin-top: 20px;">3. Rules</h3>
+                <ul style="padding-left: 20px; line-height: 1.6; list-style: none; margin-left: -5px;">
+                    <li><span style="color:red;">✖</span> No viruses, miners, or malware.</li>
+                    <li><span style="color:green;">✔</span> Keep thumbnails 16:9 for best results.</li>
+                    <li><span style="color:green;">✔</span> Keep game files under 100MB.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="upload-container">
+            <form id="upload-form" class="upload-form">
+                <div class="form-group">
+                    <label for="game-id">Game ID (unique, no spaces)</label>
+                    <input type="text" id="game-id" placeholder="e.g., super-mario-clone" required pattern="[a-z0-9-]+">
+                </div>
+
+                <div class="form-group">
+                    <label for="game-title">Game Title</label>
+                    <input type="text" id="game-title" placeholder="e.g., Super Mario Clone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="game-category">Category</label>
+                    <select id="game-category" required>
+                        <option value="Action">Action</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Puzzle">Puzzle</option>
+                        <option value="Racing">Racing</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Strategy">Strategy</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dev-name">Developer Name</label>
+                    <input type="text" id="dev-name" placeholder="Your Name or Studio" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="game-type">Game Type</label>
+                    <select id="game-type" required>
+                        <option value="iframe">HTML5 (Embed/Iframe)</option>
+                        <option value="download">Downloadable (EXE, ZIP, APK)</option>
+                        <option value="external">External Link (Itch.io, Steam)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="platform-group">
+                    <label>Platforms</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="platform" value="Web" checked> Web</label>
+                        <label><input type="checkbox" name="platform" value="Windows"> Windows</label>
+                        <label><input type="checkbox" name="platform" value="Mac"> Mac</label>
+                        <label><input type="checkbox" name="platform" value="Linux"> Linux</label>
+                        <label><input type="checkbox" name="platform" value="Android"> Android</label>
+                        <label><input type="checkbox" name="platform" value="iOS"> iOS</label>
+                    </div>
+                </div>
+
+                <div class="form-group hidden" id="file-upload-group">
+                    <label for="game-file">Game File (HTML5 .zip or Executable)</label>
+                    <input type="file" id="game-file">
+                    <small class="muted">Upload your game files directly.</small>
+                    <div id="upload-progress" class="hidden" style="margin-top: 5px;">
+                        <progress value="0" max="100" style="width: 100%;"></progress>
+                        <span id="upload-status">Uploading...</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="play-url" id="url-label">Game URL</label>
+                    <input type="url" id="play-url" placeholder="https://..." required>
+                    <small class="muted" id="url-help">Link to the game file or page.</small>
+                </div>
+
+                <div class="form-group hidden" id="filesize-group">
+                    <label for="file-size">File Size (Optional)</label>
+                    <input type="text" id="file-size" placeholder="e.g., 150 MB">
+                </div>
+
+                <div class="form-group">
+                    <label for="thumbnail-url">Thumbnail URL</label>
+                    <input type="text" id="thumbnail-url" placeholder="img/placeholder.png or https://..."
+                        value="img/placeholder.png">
+                </div>
+
+                <div class="form-group">
+                    <label for="aspect-ratio">Aspect Ratio</label>
+                    <select id="aspect-ratio">
+                        <option value="16/9">16:9 (Standard)</option>
+                        <option value="4/3">4:3 (Retro)</option>
+                        <option value="1/1">1:1 (Square)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <p class="notice"
+                        style="color: #ff9900; background: rgba(255,153,0,0.1); padding: 10px; border-radius: 4px; border-left: 3px solid #ff9900;">
+                        <strong>Note:</strong> All games are reviewed by a moderator before being published. This
+                        process may (or not) take time.
+                    </p>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit Game</button>
+            </form>
+
+            </form>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+
+</html>
